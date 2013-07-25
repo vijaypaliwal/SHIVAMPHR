@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SHIVAM ITCS - Mobile Demo</title>
+<link rel="stylesheet"  href="css/themes/default/jquery.mobile-1.3.1.min.css">
+<link rel="stylesheet" href="_assets/css/jqm-demos.css">
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
+<link rel="stylesheet" href="grid-listview.css">
+<script src="js/jquery.js"></script>
+<script src="js/jquery.mobile-1.3.1.min.js"></script>
+</head>
+<body style="background-image:url('img/bg.jpg')">
+<div data-role="page" data-theme="c" id="demo-page" class="my-page">
+  <div data-role="header" data-theme="f">
+    <h1><img src="img/icon-shivam-20x20.png" width="20px" height="20px" data-position="inline" style="vertical-align:top;"> SHIVAM ITCS</h1>
+  </div>
+  <!-- /header -->
+  
+  <div data-role="content" data-theme="f">
+    <ul id="Navigation" data-role="listview" data-inset="true" data-filter="false" data-theme="d" data-divider-theme="d" data-icon="false"   data-global-nav="demos" class="jqm-list">
+      <li data-role="list-divider" data-theme="a">Welcome- Shivam ITCS PHR</li>
+      <li data-role="list-divider">Patients</li>
+      <li ><a href="#" tag="Patients.html" data-ajax="false">All Patients</a><a href="#" tag="Patients.html">Default</a></li>
+	   <li ><a href="#" tag="Create.html" data-ajax="false">Add Patient</a><a href="#" tag="Create.html" >Default</a></li>
+      <li data-role="list-divider">Other</li>
+      <li><a href="#" tag="aboutus.html" data-ajax="false">About Us</a><a href="#" tag="aboutus.html" >Default</a></li>
+      <li><a href="#" tag="Contactus.html" data-ajax="false">Contact Us</a><a href="#" tag="Contactus.html">Default</a></li>
+    </ul>
+  </div>
+  <!-- /content -->
+  
+  <div data-role="footer" data-theme="f" data-position="fixed">
+    <h3>Patient Health Record</h3>
+  </div>
+  <!-- /footer --> 
+  
+</div>
+<!-- /page --> 
+
+<script>
+$(document).ready(function(e) {
+	$("#Navigation li a").click(function()
+	{
+		window.location.href=$(this).attr("tag");
+	});
+});
+</script>
+</body>
+</html>

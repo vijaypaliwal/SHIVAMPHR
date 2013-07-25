@@ -1,0 +1,120 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SHIVAM ITCS - Mobile Demo</title>
+<link rel="stylesheet"  href="css/themes/default/jquery.mobile-1.3.1.min.css">
+<link rel="stylesheet" href="_assets/css/jqm-demos.css">
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
+<link rel="stylesheet" href="grid-listview.css">
+<script src="js/jquery.js"></script>
+<script src="js/jquery.mobile-1.3.1.min.js"></script>
+</head>
+<body>
+<div data-role="page" data-theme="c" id="demo-page" class="my-page">
+  <div data-role="header" data-theme="f">
+    <h1><img src="img/icon-shivam-20x20.png" width="20px" height="20px" data-position="inline" style="vertical-align:top;"> Edit Patient</h1>
+        <a href="index.html" data-rel="back" data-icon="arrow-l" data-iconpos="notext" data-ajax="false">Back</a>
+  </div>
+  <!-- /header -->
+  
+  <div data-role="content" data-theme="c">
+    <form class="form-horizontal" data-inset="true">
+          <!-- Text input-->
+         <div class="control-group">
+            <label class="control-label">Name</label>
+               <div class="controls">
+			    <input id="PID" name="PID" type="hidden" placeholder="please enter patient name" class="input-xlarge" required />
+                   <input id="ProductName" name="ProductName" type="text" placeholder="please enter patient name" class="input-xlarge" required />
+                 </div>
+          </div>
+           <div class="control-group">
+            <label class="control-label">Phone Number</label>
+               <div class="controls">
+                   <input id="Pphone" name="Pphone" type="text" placeholder="please enter patient phone" class="input-xlarge" required />
+                 </div>
+          </div>
+           <div class="control-group">
+            <label class="control-label">DoctorName</label>
+               <div class="controls">
+                   <input id="DoctorName" name="DoctorName" type="text" placeholder="please enter doctor name" class="input-xlarge" required />
+                 </div>
+          </div>
+           <div class="control-group">
+            <label class="control-label">Disease</label>
+               <div class="controls">
+                   <input id="Disease" name="Disease" type="text" placeholder="please enter disease" class="input-xlarge" required />
+                 </div>
+          </div>
+          <div class="jqm-content">
+          	 <input type="button" id="singlebutton"  data-theme="f" value="Update" name="singlebutton" ></input>
+          </div>
+</form>		
+  </div>
+  <!-- /content -->
+  
+  <div data-role="footer" data-theme="f" data-position="fixed">
+    <h3>Patient Health Record</h3>
+  </div>
+  <!-- /footer --> 
+  
+</div>
+<!-- /page --> 
+
+ 
+<script>
+
+ function GetQueryStringParams(sParam)
+            {
+                var sPageURL = window.location.search.substring(1);
+                var sURLVariables = sPageURL.split('&');
+                for (var i = 0; i < sURLVariables.length; i++)
+                {
+                    var sParameterName = sURLVariables[i].split('=');
+                    if (sParameterName[0] == sParam)
+                    {
+                        return sParameterName[1];
+                    }
+                }
+            }
+            $(document).ready(function()
+            {
+				 
+                 $('input#ProductName').attr("value",GetQueryStringParams("name"));
+                 $('input#PID').attr("value",GetQueryStringParams("id"));
+                $('#DoctorName').val(GetQueryStringParams("dn"));
+                $('#Disease').val(GetQueryStringParams("des"));
+			   $('#Pphone').val(GetQueryStringParams("phone"));
+            });
+ 
+                $("#singlebutton").click(function () {
+                                         
+                                         var URLPopst="http://mobile.shivamitconsultancy.com/Service1.svc/EditPatient";     
+                                      $.ajax({
+                                             type: 'post',
+                                             url:URLPopst,
+                                             data:'{"patientEntity":{"Disease":"' + $('input#Disease').val() + '", "ID": ' + $('input#PID').val() + ',"PName": "' + $('input#ProductName').val() + '","DoctorName":"' + $('input#DoctorName').val() + '","PHone":"' + $('input#Pphone').val() + '"}}',
+                                             dataType: 'text',
+                                             contentType: "application/json; charset=utf-8",
+                                             error: function (request) {
+			                                       alert(request.responseText);
+    	                                         event.preventDefault();
+                                             },
+                                             success: function (result) {
+												 debugger;
+                                         	    alert("created successfully");
+											 	window.location.href="index.html";
+                                             }
+                                             });
+                                      
+                                      });
+  
+
+
+</script>
+
+
+</body>
+</html>
